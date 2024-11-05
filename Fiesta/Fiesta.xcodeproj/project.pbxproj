@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB4E836C2CDA667600B43FED /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E836B2CDA667600B43FED /* DetailsView.swift */; };
 		F5CD13962CDA58890032827E /* FiestaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13952CDA58890032827E /* FiestaApp.swift */; };
 		F5CD13982CDA58890032827E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13972CDA58890032827E /* ContentView.swift */; };
 		F5CD139A2CDA588B0032827E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5CD13992CDA588B0032827E /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB4E836B2CDA667600B43FED /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		F5CD13922CDA58890032827E /* Fiesta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiesta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5CD13952CDA58890032827E /* FiestaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiestaApp.swift; sourceTree = "<group>"; };
 		F5CD13972CDA58890032827E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +38,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB4E836A2CDA666000B43FED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BB4E836B2CDA667600B43FED /* DetailsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F5CD13892CDA58890032827E = {
 			isa = PBXGroup;
 			children = (
@@ -55,7 +65,7 @@
 		F5CD13942CDA58890032827E /* Fiesta */ = {
 			isa = PBXGroup;
 			children = (
-				F5CD13A72CDA5D0F0032827E /* View */,
+				BB4E836A2CDA666000B43FED /* View */,
 				F5CD13A62CDA5CE80032827E /* Model */,
 				F5CD13A32CDA5CAF0032827E /* Service */,
 				F5CD13952CDA58890032827E /* FiestaApp.swift */,
@@ -88,13 +98,6 @@
 				F5CD13A82CDA5D310032827E /* Listing.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		F5CD13A72CDA5D0F0032827E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5CD13A52CDA5CBE0032827E /* WebService.swift in Sources */,
+				BB4E836C2CDA667600B43FED /* DetailsView.swift in Sources */,
 				F5CD13982CDA58890032827E /* ContentView.swift in Sources */,
 				F5CD13A92CDA5D310032827E /* Listing.swift in Sources */,
 				F5CD13962CDA58890032827E /* FiestaApp.swift in Sources */,

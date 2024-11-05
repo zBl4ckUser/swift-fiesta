@@ -11,7 +11,7 @@ import SwiftUI
 struct FiestaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DetailsView()
         }
     }
 }
