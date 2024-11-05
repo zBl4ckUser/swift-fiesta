@@ -13,6 +13,8 @@
 		F5CD139D2CDA588B0032827E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5CD139C2CDA588B0032827E /* Preview Assets.xcassets */; };
 		F5CD13A52CDA5CBE0032827E /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13A42CDA5CBE0032827E /* WebService.swift */; };
 		F5CD13A92CDA5D310032827E /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13A82CDA5D310032827E /* Listing.swift */; };
+		F5CD13AB2CDA5FC90032827E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13AA2CDA5FC90032827E /* HomeView.swift */; };
+		F5CD13AE2CDA64150032827E /* ListingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13AD2CDA64150032827E /* ListingCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		F5CD139C2CDA588B0032827E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F5CD13A42CDA5CBE0032827E /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		F5CD13A82CDA5D310032827E /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
+		F5CD13AA2CDA5FC90032827E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F5CD13AD2CDA64150032827E /* ListingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,8 +97,18 @@
 		F5CD13A72CDA5D0F0032827E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F5CD13AC2CDA64070032827E /* Component */,
+				F5CD13AA2CDA5FC90032827E /* HomeView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F5CD13AC2CDA64070032827E /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				F5CD13AD2CDA64150032827E /* ListingCardView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,8 +182,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5CD13A52CDA5CBE0032827E /* WebService.swift in Sources */,
+				F5CD13AE2CDA64150032827E /* ListingCardView.swift in Sources */,
 				F5CD13982CDA58890032827E /* ContentView.swift in Sources */,
 				F5CD13A92CDA5D310032827E /* Listing.swift in Sources */,
+				F5CD13AB2CDA5FC90032827E /* HomeView.swift in Sources */,
 				F5CD13962CDA58890032827E /* FiestaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
