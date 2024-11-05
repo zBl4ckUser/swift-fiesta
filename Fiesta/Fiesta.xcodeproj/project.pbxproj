@@ -11,6 +11,8 @@
 		F5CD13982CDA58890032827E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13972CDA58890032827E /* ContentView.swift */; };
 		F5CD139A2CDA588B0032827E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5CD13992CDA588B0032827E /* Assets.xcassets */; };
 		F5CD139D2CDA588B0032827E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5CD139C2CDA588B0032827E /* Preview Assets.xcassets */; };
+		F5CD13A52CDA5CBE0032827E /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13A42CDA5CBE0032827E /* WebService.swift */; };
+		F5CD13A92CDA5D310032827E /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13A82CDA5D310032827E /* Listing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		F5CD13972CDA58890032827E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F5CD13992CDA588B0032827E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F5CD139C2CDA588B0032827E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F5CD13A42CDA5CBE0032827E /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		F5CD13A82CDA5D310032827E /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,9 @@
 		F5CD13942CDA58890032827E /* Fiesta */ = {
 			isa = PBXGroup;
 			children = (
+				F5CD13A72CDA5D0F0032827E /* View */,
+				F5CD13A62CDA5CE80032827E /* Model */,
+				F5CD13A32CDA5CAF0032827E /* Service */,
 				F5CD13952CDA58890032827E /* FiestaApp.swift */,
 				F5CD13972CDA58890032827E /* ContentView.swift */,
 				F5CD13992CDA588B0032827E /* Assets.xcassets */,
@@ -65,6 +72,29 @@
 				F5CD139C2CDA588B0032827E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F5CD13A32CDA5CAF0032827E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F5CD13A42CDA5CBE0032827E /* WebService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		F5CD13A62CDA5CE80032827E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F5CD13A82CDA5D310032827E /* Listing.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F5CD13A72CDA5D0F0032827E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5CD13A52CDA5CBE0032827E /* WebService.swift in Sources */,
 				F5CD13982CDA58890032827E /* ContentView.swift in Sources */,
+				F5CD13A92CDA5D310032827E /* Listing.swift in Sources */,
 				F5CD13962CDA58890032827E /* FiestaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
