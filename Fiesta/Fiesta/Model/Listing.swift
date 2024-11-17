@@ -20,4 +20,6 @@ struct Listing: Identifiable, Codable{
     let breed_id: String
     let user_id: String
     let sex: String
+    let specie: Specie
+    let breed: Breed
 }

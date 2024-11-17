@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E507DFD12CE950150064E93F /* NewListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507DFD02CE950150064E93F /* NewListingView.swift */; };
+		E507DFD32CE95B610064E93F /* ListingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507DFD22CE95B610064E93F /* ListingResponse.swift */; };
+		E507DFD52CE97E550064E93F /* Breed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507DFD42CE97E550064E93F /* Breed.swift */; };
+		E507DFD72CE97E620064E93F /* Specie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507DFD62CE97E620064E93F /* Specie.swift */; };
+		E5272F1E2CE92F3A0004F69A /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5272F1D2CE92F3A0004F69A /* ListingDetailView.swift */; };
 		F5CD13962CDA58890032827E /* FiestaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13952CDA58890032827E /* FiestaApp.swift */; };
 		F5CD13982CDA58890032827E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD13972CDA58890032827E /* ContentView.swift */; };
 		F5CD139A2CDA588B0032827E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5CD13992CDA588B0032827E /* Assets.xcassets */; };
@@ -18,6 +23,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E507DFD02CE950150064E93F /* NewListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListingView.swift; sourceTree = "<group>"; };
+		E507DFD22CE95B610064E93F /* ListingResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingResponse.swift; sourceTree = "<group>"; };
+		E507DFD42CE97E550064E93F /* Breed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breed.swift; sourceTree = "<group>"; };
+		E507DFD62CE97E620064E93F /* Specie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Specie.swift; sourceTree = "<group>"; };
+		E5272F1D2CE92F3A0004F69A /* ListingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListingDetailView.swift; path = Component/ListingDetailView.swift; sourceTree = "<group>"; };
 		F5CD13922CDA58890032827E /* Fiesta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiesta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5CD13952CDA58890032827E /* FiestaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiestaApp.swift; sourceTree = "<group>"; };
 		F5CD13972CDA58890032827E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,7 +99,10 @@
 		F5CD13A62CDA5CE80032827E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E507DFD22CE95B610064E93F /* ListingResponse.swift */,
 				F5CD13A82CDA5D310032827E /* Listing.swift */,
+				E507DFD42CE97E550064E93F /* Breed.swift */,
+				E507DFD62CE97E620064E93F /* Specie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -98,7 +111,9 @@
 			isa = PBXGroup;
 			children = (
 				F5CD13AC2CDA64070032827E /* Component */,
+				E5272F1D2CE92F3A0004F69A /* ListingDetailView.swift */,
 				F5CD13AA2CDA5FC90032827E /* HomeView.swift */,
+				E507DFD02CE950150064E93F /* NewListingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -181,11 +196,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5272F1E2CE92F3A0004F69A /* ListingDetailView.swift in Sources */,
 				F5CD13A52CDA5CBE0032827E /* WebService.swift in Sources */,
 				F5CD13AE2CDA64150032827E /* ListingCardView.swift in Sources */,
 				F5CD13982CDA58890032827E /* ContentView.swift in Sources */,
+				E507DFD32CE95B610064E93F /* ListingResponse.swift in Sources */,
 				F5CD13A92CDA5D310032827E /* Listing.swift in Sources */,
+				E507DFD12CE950150064E93F /* NewListingView.swift in Sources */,
 				F5CD13AB2CDA5FC90032827E /* HomeView.swift in Sources */,
+				E507DFD72CE97E620064E93F /* Specie.swift in Sources */,
+				E507DFD52CE97E550064E93F /* Breed.swift in Sources */,
 				F5CD13962CDA58890032827E /* FiestaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,6 +347,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -355,6 +376,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
