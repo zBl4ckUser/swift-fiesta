@@ -14,7 +14,7 @@ struct HomeView: View {
     // Função para obter as listagens
     func getListings() async {
         do {
-            if let listings = try await service.getAllListings() {
+            if let listings = try await service.getListings() {
                 self.listings = listings
             }
         } catch {

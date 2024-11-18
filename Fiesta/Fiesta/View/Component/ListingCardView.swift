@@ -81,7 +81,7 @@ func generateExampleListing() -> Listing {
         user_id: uuid,
         sex: "Macho",
         specie: Specie(id: "aakdjjguaygdhgahsgdhgasfdhgasfd", name: "Cachorro"),
-        breed: Breed(id: "kahsdjhasgdjhasd", specieId: "aksjdbaksjhdkajsd", name: "Rottweiler")
+        breed: Breed(id: "kahsdjhasgdjhasd", specie_id: "aksjdbaksjhdkajsd", name: "Rottweiler")
     )
 }
 

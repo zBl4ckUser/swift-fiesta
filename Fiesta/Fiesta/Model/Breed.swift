@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Breed: Identifiable, Codable{
+struct Breed: Identifiable, Codable, Hashable{
     let id: String
-    let specieId: String
+    let specie_id: String
     let name: String
 }

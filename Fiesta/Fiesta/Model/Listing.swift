@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Listing: Identifiable, Codable{
+struct Listing: Identifiable, Codable, Hashable{
     let id: String
     let created_at: String
     let animal_name: String

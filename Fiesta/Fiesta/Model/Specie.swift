@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Specie: Identifiable, Codable{
+struct Specie: Identifiable, Codable, Hashable{
     let id: String
     let name: String
 }
