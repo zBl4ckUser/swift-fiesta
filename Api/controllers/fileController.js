@@ -11,11 +11,9 @@ exports.uploadImage = [
   async (req, res) => {
     try {
       const file = req.file;
-
       if (!file) {
         return res.status(400).json({ message: 'No image file provided' });
       }
-
       const fileName = `${Date.now()}_${file.originalname}`;
 
       // Fazer upload da imagem para o Supabase Storage

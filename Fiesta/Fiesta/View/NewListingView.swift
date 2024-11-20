@@ -12,6 +12,8 @@ struct NewListingView: View {
     let service = WebService()
     @State private var errorMsg: [String] = []
     @State private var showAlert: Bool = false
+    @State private var isLoading: Bool = false
+    @State private var showConfirmationAlert: Bool = false
     
     @State private var selectedImage: UIImage? = nil
     @State private var showImagePicker: Bool  = false
@@ -19,8 +21,7 @@ struct NewListingView: View {
     @State private var sex: String = "Macho"
     @State private var localization: String = ""
     @State private var age: String = ""
-    @State private var animal: String = "Cachorro"
-    @State private var size: String = ""
+    @State private var size: String = "Médio"
     @State private var breed: String  = ""
     @State private var description: String  = ""
     
@@ -32,90 +33,86 @@ struct NewListingView: View {
     @State private var selectedSpecie: Specie?
     @State private var selectedBreed: Breed?
     
+    
+    // Função responsável por converter a imagem escolhida no formato Data, que poderá ser mandado na requisição
     func imageToData() -> Data? {
         guard let image = selectedImage else { return nil }
-        return image.jpegData(compressionQuality: 0.8) // Converte para JPEG com compressão de 80%
+        return image.jpegData(compressionQuality: 0.5) // Converte a imagem para jpegData com qualidade de 80%
     }
-
     
-    func uploadImage(imageData: Data, name: String) async -> Bool {
-        // URL da sua API
-        let url = URL(string: "http://localhost:1824/f/")!
-
-        // Criar um boundary único
-        let boundary = "Boundary-\(UUID().uuidString)"
+    // Função responsável por fazer todo o processo de publicar uma nova listagem
+    // o @MainActor vai fazer a função ser executada pela thread principal, assim,
+    // vai nos permitir usar o self.dismiss()
+    @MainActor
+    private func handlePublish() async throws{
+        if EmptyFields() {
+            return
+        }
         
-        // Configurar a requisição
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        isLoading = true
+        defer { isLoading = false }
         
-        // Criar o corpo da requisição
-        var body = Data()
-
-        // Adicionar os campos de texto
-        body.append(contentsOf: "--\(boundary)\r\n".data(using: .utf8)!)
-        body.append(contentsOf: "Content-Disposition: form-data; name=\"name\"\r\n\r\n".data(using: .utf8)!)
-        body.append(contentsOf: name.data(using: .utf8)!)
-        body.append(contentsOf: "\r\n".data(using: .utf8)!)
-        
-        // Adicionar a imagem
-        body.append(contentsOf: "--\(boundary)\r\n".data(using: .utf8)!)
-        body.append(contentsOf: "Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
-        body.append(contentsOf: "Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
-        body.append(contentsOf: imageData) // Aqui estamos adicionando a imagem como dados binários
-        body.append(contentsOf: "\r\n".data(using: .utf8)!)
-        
-        // Finalizar o corpo
-        body.append(contentsOf: "--\(boundary)--\r\n".data(using: .utf8)!)
-        
-        // Atribuir o corpo da requisição
-        request.httpBody = body
-        
-        // Enviar a requisição
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            print(response.description)
-            // Verificar a resposta
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                // Sucesso
-                return true
-            } else {
-                // Erro
-                return false
+            guard let imageData = imageToData(),
+                  let specie = selectedSpecie,
+                  let breed = selectedBreed else {
+                errorMsg.append("Selecione uma imagem, espécie e raça")
+                showAlert = true
+                return
             }
+            
+            let photoUrl = try await service.uploadImage(imageData: imageData)
+            let data = NewListing(
+                animal_name: name,
+                animal_age: age,
+                description: description,
+                size: size,
+                sex: sex,
+                photo_url: photoUrl,
+                localization: localization,
+                specie_id: specie.id,
+                breed_id: breed.id,
+                user_id: "2ac8d213-fa8c-476e-a870-b9b79ede6532"
+            )
+            
+            //Cria a listagem do animal
+            try await service.createListing(listingData: data)
+            //Se tudo der certo, sai da View
+            self.dismiss()
         } catch {
-            print("Erro ao enviar imagem: \(error)")
-            return false
+            errorMsg.append("Erro ao criar listagem: \(error.localizedDescription)")
+            showAlert = true
         }
     }
     
-    
-    
-    
-    
+    //Faz o get das espécies "Cachorro, Gato, Ouriço..."
     private func fetchSpecies() async {
         do {
             if let fetchedSpecies = try await service.getSpecies() {
                 species = fetchedSpecies
-                selectedSpecie = species.first
+                selectedSpecie = species.first // Deixa a primeira espécie da lista selecionada por padrão
+                if let firstSpecie = species.first{
+                    await fetchBreeds(for: firstSpecie.id)
+                }
             }
         } catch {
             print("Erro ao buscar espécies: \(error)")
         }
     }
     
+    //Faz o get das raças de determinada espécie
     private func fetchBreeds(for specieID: String) async {
         do {
             if let fetchedBreeds = try await service.getBreeds(specie_id: specieID) {
                 breeds = fetchedBreeds
+                selectedBreed = fetchedBreeds.first // Inicializa com a primeira raça
             }
-            selectedBreed = nil
         } catch {
             print("Erro ao buscar raças: \(error)")
         }
     }
     
+    //Nos diz se todos os campos estão vazios
     private func EmptyFields() -> Bool{
         errorMsg = []
         
@@ -200,48 +197,26 @@ struct NewListingView: View {
                     // Animal, Porte e Raça
                     HStack {
                         // Dropdown para Animal
-                        Picker("Animal", selection: $selectedSpecie) {
+                        Picker("Espécie", selection: $selectedSpecie) {
                             ForEach(species, id: \.self) { specie in
-                                Text(specie.name)
-                                    .font(.footnote)
-                                    .truncationMode(.tail)
-                                //                                    .lineLimit(1)
-                                    .tag(specie as Specie?)
-                                
-                                
+                                Text(specie.name).tag(Optional(specie))
                             }
                         }
                         .padding()
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(8)
-                        .pickerStyle(MenuPickerStyle()) // Exibe como um menu dropdown
-                        .onChange(of: selectedSpecie ?? Specie(id: "OI", name: "oi")) { newValue in
-                            // Atualiza as raças ao selecionar uma nova espécie
-                            selectedSpecie = newValue
-                            Task{
-                                await fetchBreeds(for: newValue.id)
-                                
+                        .pickerStyle(MenuPickerStyle())
+                        .onChange(of: selectedSpecie) { newValue in
+                            if let specie = newValue {
+                                Task {
+                                    await fetchBreeds(for: specie.id)
+                                }
                             }
                         }
                         
-                        /*.onChange(of: selectedBreed ?? Breed(id: "OI", specie_id: "oi", name: "oi")) { newValue in
-                         // Atualiza as raças ao selecionar uma nova espécie
-                         Task{
-                         if let data = try await service.getBreeds(specie_id: newValue.id){
-                         self.breeds = data
-                         self.selectedBreed = Breed(id: "", specie_id: "", name: "")
-                         }
-                         }
-                         }*/
-                        
-                        
-                        
-                        
-                        Picker("Raça", selection: $selectedBreed){
-                            ForEach(breeds) { breed in
-                                Text(breed.name)
-                                    .tag(breed as Breed?)
-                                    .lineLimit(1)
+                        Picker("Raça", selection: $selectedBreed) {
+                            ForEach(breeds, id: \.self) { breed in
+                                Text(breed.name).tag(Optional(breed))
                             }
                         }
                         .padding()
@@ -254,25 +229,12 @@ struct NewListingView: View {
                                 Text(n)
                             }
                         }
-                        .onChange(of: size){ newValue in
-                            Task{
-                                size = newValue
-                            }
-                        }
                         .padding()
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(8)
                         .pickerStyle(MenuPickerStyle())
                         
-                        
-                        
                     }
-                    
-                    
-                    /*TextField("Raça", text: $breed)
-                     .padding()
-                     .background(Color.gray.opacity(0.2))
-                     .cornerRadius(8)*/
                 }
                 
                 // Descrição
@@ -284,29 +246,16 @@ struct NewListingView: View {
                 
                 // Botões Publicar e Cancelar
                 HStack {
-                    Button("Publicar") {
-                        
-                        // Não deixa publicar se os campos estiverem vazios
-                        if(EmptyFields()){
-                            return
-                        }
-                        
-                        // Verificar se a imagem está selecionada
-                        if let imageData = imageToData() {
-                            Task {
-                                let success = await uploadImage(imageData: imageData, name: name)
-                                if success {
-                                    print("Imagem enviada com sucesso")
-                                } else {
-                                    print("Falha ao enviar a imagem")
-                                }
-                            }
+                    Button(action: {
+                        showConfirmationAlert = true
+                    }){
+                        if isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            // Mostra um "loading" circular
                         } else {
-                            print("Nenhuma imagem selecionada")
+                            Text("Publicar")
                         }
-                        
-                        
-                        print("\(localization) \(name) \(sex) \(age)  \(size)")
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -333,20 +282,35 @@ struct NewListingView: View {
         }
         .navigationTitle("Nova Listagem")
         .alert(isPresented: $showAlert) {
-            
+            Alert(
+                title: Text("Erro"),
+                message: Text(errorMsg.joined(separator: "\n")),
+                dismissButton: .default(Text("OK"))
+            )
+        }
+        .alert(isPresented: $showConfirmationAlert) {
                     Alert(
-                        title: Text("Erro"),
-                        message: Text(errorMsg.joined(separator: "\n")),
-                        dismissButton: .default(Text("OK"))
+                        title: Text("Confirmar Publicação"),
+                        message: Text("Você tem certeza que deseja publicar essa listagem?"),
+                        primaryButton: .destructive(Text("Cancelar")) {
+                            // Não faz nada, apenas fecha o Alert
+                        },
+                        secondaryButton: .default(Text("Prosseguir")) {
+                            // Chama a função para publicar a listagem
+                            Task {
+                                try await handlePublish()
+                            }
+                        }
                     )
                 }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }
 
 
 
 
-// Image Picker Wrapper
+// Image Picker Wrapper; Serve para escolher a imagem
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
     

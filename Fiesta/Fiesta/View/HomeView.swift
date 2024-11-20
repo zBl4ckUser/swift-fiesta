@@ -58,10 +58,16 @@ struct HomeView: View {
             }
             .padding(.top)
         }
+        // o .onAppear vai executar um código quando a View aparecer pela primeira vez
         .onAppear(){
+            // `Task` representa uma ação assíncrona a ser realizada
             Task {
                 await getListings()
             }
+        }
+        // para crair o "pull to refresh", o tal do arraste para recarregar
+        .refreshable {
+            await getListings()
         }
         
     }
