@@ -7,6 +7,7 @@
 
 import Foundation
 
+//Representa a listagem em si, da forma que vem do banco de dados.
 struct Listing: Identifiable, Codable, Hashable{
     let id: String
     let created_at: String

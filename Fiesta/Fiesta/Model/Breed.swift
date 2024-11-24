@@ -7,6 +7,7 @@
 
 import Foundation
 
+//Representa a Raça do animal
 struct Breed: Identifiable, Codable, Hashable{
     let id: String
     let specie_id: String

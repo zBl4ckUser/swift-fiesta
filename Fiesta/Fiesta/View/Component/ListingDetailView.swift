@@ -17,7 +17,7 @@ struct ListingDetailsView: View {
         do{
             if let image =  try await service.downloadImage(from: listing.photo_url){
                 self.listingImage = image
-                }
+            }
         } catch {
             print("Ocorreu um erro ao obter a imagem: \(error)")
         }
@@ -26,6 +26,7 @@ struct ListingDetailsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
+                //Deixa a imagem da listagem centralizada
                 HStack(alignment: .center){
                     Spacer()
                     if let image = listingImage{
@@ -37,8 +38,6 @@ struct ListingDetailsView: View {
                     }
                     Spacer()
                 }
-                
-                
                 
                 HStack(){
                     Text("\(listing.animal_name),")
@@ -68,7 +67,7 @@ struct ListingDetailsView: View {
                         .font(.body)
                 }
                 .padding(.horizontal, 8.0)
-            
+                
                 Divider()
                 Text("Descrição")
                     .font(.title3)
@@ -76,8 +75,8 @@ struct ListingDetailsView: View {
                 Text(listing.description)
                     .font(.body)
                     .padding(.horizontal, 8.0)
-                }
-                .padding()
+            }
+            .padding()
         }
         .onAppear(){
             Task{

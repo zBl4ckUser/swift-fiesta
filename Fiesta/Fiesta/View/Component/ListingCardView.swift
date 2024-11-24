@@ -13,6 +13,8 @@ struct ListingCardView: View {
     var service = WebService()
     @State private var listingImage: UIImage?
     
+    
+    //Biaxa a imagem do card para que possa ser exibida
     func downloadImage() async {
         do{
             if let image =  try await service.downloadImage(from: listing.photo_url){
@@ -25,6 +27,8 @@ struct ListingCardView: View {
     
     
     var body: some View {
+        //Quando clicar no card, o usuário será redirecionado
+        //  para a página de detalhes da listagem 
         NavigationLink(destination: ListingDetailsView(listing: listing)){
             VStack(alignment: .leading) {
                 HStack(spacing:16.0) {
@@ -34,6 +38,11 @@ struct ListingCardView: View {
                             .scaledToFill()
                             .frame(width: 168, height: 168.0)
                             .cornerRadius(8.0)
+                            
+                    }else{
+                        ProgressView()
+                        // Mostra um ProgressIndicator
+                        //  enquanto a imagem não tiver sido carregada
                     }
                     VStack(alignment: .leading, spacing: 8.0) {
                         Text(listing.animal_name)
@@ -54,7 +63,7 @@ struct ListingCardView: View {
             .background(Color(.lightGray).opacity(0.30))
             .cornerRadius(16.0)
             
-        }//fech
+        }//fetch
         .onAppear{
             Task{
                 await downloadImage()
@@ -64,15 +73,15 @@ struct ListingCardView: View {
     }
 }
 
+// Função para criar uma listagem de exemplo para teste
 func generateExampleListing() -> Listing {
     let uuid = UUID().uuidString
-    
     return Listing(
         id: uuid,
         created_at: "2024-11-05T15:00:00Z",
         animal_name: "Rex",
         animal_age: "5 meses",
-        description: "Rex é um cachorro amigável e cheio de energia. Adora brincar no parque. laksjdlaksjhdkljashdkjashdkjasdkjahskdjhaskdjhaskjdhaskjdhaksjdhakjhdklajhdlkjahlkfjhawlkejhflweuiruqweiruywqoieurywiueryiouwqyvaitomarnocuRodrigo desgraçdo do cralho maldito lazarento salafrario maldito aaaaaa aaaaa aaaa aa aa a a a aa aa aaaaa aaaaaaaa aa ",
+        description: "Rex é um cachorro amigável e cheio de energia. Adora brincar no parque. laksjdlaksjhdkljashdkjashdkjasdkjahskdjhaskdjhaskjdhaskj",
         size: "Médio",
         photo_url: "https://hsxlzcptowkueotmdimx.supabase.co/storage/v1/object/public/uploads/1731592435065_1000071955.jpg",
         localization: "São Paulo, SP",
@@ -87,6 +96,7 @@ func generateExampleListing() -> Listing {
 
 struct ListingCardView_Previews: PreviewProvider {
     static var previews: some View {
+        // Mostra o listing card com o animal de exemplo, no Preview da View
         ListingCardView(listing: generateExampleListing())
     }
 }

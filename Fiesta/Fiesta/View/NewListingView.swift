@@ -37,7 +37,7 @@ struct NewListingView: View {
     // Função responsável por converter a imagem escolhida no formato Data, que poderá ser mandado na requisição
     func imageToData() -> Data? {
         guard let image = selectedImage else { return nil }
-        return image.jpegData(compressionQuality: 0.5) // Converte a imagem para jpegData com qualidade de 80%
+        return image.jpegData(compressionQuality: 0.5) // Converte a imagem para jpegData com qualidade de 50%
     }
     
     // Função responsável por fazer todo o processo de publicar uma nova listagem
@@ -248,6 +248,9 @@ struct NewListingView: View {
                 HStack {
                     Button(action: {
                         showConfirmationAlert = true
+                        //Vai mostrar o ALERT de confirmação,
+                        // para saber se o usuário realmente deseja publicar
+                        
                     }){
                         if isLoading {
                             ProgressView()
@@ -271,11 +274,13 @@ struct NewListingView: View {
                     .background(Color.red)
                     .foregroundColor(.white)
                     .cornerRadius(8)
+                    //Cancela a publicação de uma nova listagem, e volta para a tela anterior
                 }
             }
             .padding()
         }
         .onAppear {
+            //Faz o fetch das espécies
             Task{
                 await fetchSpecies()
             }
@@ -287,6 +292,7 @@ struct NewListingView: View {
                 message: Text(errorMsg.joined(separator: "\n")),
                 dismissButton: .default(Text("OK"))
             )
+            //Mostra as mensagens de erro, se tiver;
         }
         .alert(isPresented: $showConfirmationAlert) {
                     Alert(

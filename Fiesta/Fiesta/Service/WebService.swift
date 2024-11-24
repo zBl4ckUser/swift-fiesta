@@ -7,6 +7,8 @@
 import Foundation
 import UIKit
 
+
+//struct que representa o body da requisição para criar uma nova listagem
 struct NewListing: Encodable{
     let animal_name: String
     let animal_age: String
