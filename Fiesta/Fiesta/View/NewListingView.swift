@@ -8,6 +8,14 @@
 import SwiftUI
 import PhotosUI
 
+/*
+ Essa tela só é acessível ao usuário se ele apertar o botáo de "Cadastrar animal"
+  na página inicial(HomeView).
+ Essa tela contém um imagem picker, TextFields e Pickers, para que o usuário
+  coloque as informações do usuário que ele quer cadastrar.
+ 
+ */
+
 struct NewListingView: View {
     let service = WebService()
     @State private var errorMsg: [String] = []

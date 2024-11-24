@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+
+/*
+ Essa View só é acessível ao usuário se ele apertar
+  em algum card na página principal(HomeView).
+ Essa View mostra os detalhes da listagem, como a espécie, raça, nome
+  imagem e descrição do animal.
+ */
+
 struct ListingDetailsView: View {
     var listing: Listing  // Recebe o Listing da HomeView
     

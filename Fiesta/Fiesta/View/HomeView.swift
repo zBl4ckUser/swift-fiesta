@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+
+
+/*
+ Essa é a view inicial do projeto.
+ Nela, existe a mensagem de boas-vindas na parte superior central,
+    junto com um botão para criar uma nova listagem de animal.
+ Abaixo do botão para criar animal, há os cards das listagens atuais de animais. Ao clicar em uma dessas listagens,
+     o usuário será redirecionado para a View ListingDetailView.
+    
+ */
+
 struct HomeView: View {
     let service = WebService()
     @State private var listings: [Listing] = []
